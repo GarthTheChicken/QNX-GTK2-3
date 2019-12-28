@@ -1,0 +1,1059 @@
+/**
+ * Copyright (c) 2017 Vlasta Vesely <vlastavesely@protonmail.ch>
+ *
+ * This file is part of Raleigh Reloaded GTK theme.
+ *
+ * This is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/***********
+ * general *
+ ***********/
+* {
+	/*engine: unico;*/
+	padding: 0;
+    margin:0;	
+	background-clip: padding-box;
+    -GtkToolButton-icon-spacing: 4;
+    -GtkDialog-button-spacing: 4;
+    -GtkTextView-error-underline-color: @error_color;
+    -GtkScrolledWindow-scrollbar-spacing: 0;
+    -GtkToolItemGroup-expander-size: 11;
+    -GtkIMHtml-hyperlink-color: @link_color;
+    -GtkHTML-link-color: @link_color;
+    -WnckTasklist-fade-overlay-rect: 0;
+    /*outline-color: @focus_border_color;*/
+    outline-style: dashed;
+ 	outline-color: alpha(currentColor,0.3);    
+    outline-offset: -2px;
+    outline-width: 0px; /* disable ugly focus-line */
+    -gtk-outline-radius: 2px;
+    -gtk-icon-style: regular; /* disable symbolic icons */
+    -GtkWindow-resize-grip-width: 11;
+    -GtkWindow-resize-grip-height: 11;
+  	-GtkWidget-text-handle-width: 20;
+  	-GtkWidget-text-handle-height: 24;
+  	-GtkDialog-action-area-border: 0;
+  	-gtk-secondary-caret-color: #ea5421;
+  	-GtkScrollbar-has-backward-stepper: true;
+    -GtkScrollbar-has-forward-stepper: true;
+    -GtkStatusbar-shadow-type: GTK_SHADOW_IN;
+}
+.background {
+	background-color: @theme_bg_color;
+	color: @theme_fg_color;
+}
+
+.content-view {background: #00ff00}
+.window {
+	background-color: @theme_window_color;
+	color: @theme_fg_color;
+}
+.background:backdrop {
+	background-color: @theme_base_color;
+}
+*:disabled {
+	color: shade(@theme_bg_color, .6);
+	text-shadow: 1px 1px @theme_base_color;
+	-gtk-icon-effect: dim;
+}
+.flat:not(:hover):not(:checked) {
+	border: 0;
+	background: transparent;
+}
+
+/*.gtkstyle-fallback {
+
+  background-color: rgba(239,244,247,0.999);
+  color: #252525; }
+
+.gtkstyle-fallback:hover {
+
+  background-color: #206AD9;
+  color: white; }
+
+.gtkstyle-fallback:active {
+
+  background-color: #206AD9;
+  color: white; }
+
+.gtkstyle-fallback:disabled {
+
+  background-color: #f6f8fa;
+  color: rgba(37, 37, 37, 0.55); }
+
+.gtkstyle-fallback:selected {
+  background-color: #206AD9;
+  color: #ffffff; }*/
+
+/*************
+ * selection *
+ *************/
+selection,
+*:selected,
+.view:selected {
+	background: @theme_bg_color;
+	color: @theme_fg_color;
+}
+selection:focus,
+*:selected:focus,
+.view:selected:focus,
+*:focus *:selected {
+	background-color: @theme_selected_bg_color;
+	color: @theme_selected_fg_color;
+}
+.rubberband,
+.view.rubberband {
+	background-color: alpha(@theme_selected_bg_color, 0.3);
+	border: 1px solid @theme_selected_bg_color;
+}
+
+/***********
+ * buttons *
+ ***********/
+button, .button {
+	background: @theme_bg_color;
+	background-image: -gtk-gradient (linear,
+  	left top,
+  	left bottom,
+  	from(@theme_button_gradient_from),
+  	to(@theme_button_gradient_to));
+	border-image: url("assets/button/button.png") 3 / 3px stretch;
+	padding: .45em;
+}
+
+button:hover, .button:hover {
+	background-color: shade(@theme_bg_color, 1.05);
+}
+button:active, .button:active,
+button:active:hover, .button:active:hover,
+button.toggle:checked,
+button.toggle:active:hover,
+stackswitcher button:checked {
+	background-color: shade(@theme_bg_color, .9);
+	border-image-source: url("assets/button/button.png");
+}
+button:focus, .button:focus {
+		background-image: -gtk-gradient (linear,
+  	left top,
+  	left bottom,
+  	from(@theme_button_gradient_to),
+  	to(@theme_button_gradient_from));
+	border-image-source: url("assets/button/button-pressed.png");
+}
+button:disabled, .button:disabled {
+	border-image-source: url("assets/button/button.png");
+}
+button.link {
+	color: @link_color;
+}
+button.link > label {
+	text-decoration-line: underline;
+}
+button.color * {
+	border-image: url("assets/frame-etched-out.png") 2 / 2px stretch;
+	margin: 0.1em 1.9em;
+	min-height: 1.2em;
+}
+
+/**************
+ * scrollbars *
+ **************/
+scrollbar button,
+scrollbar button:hover,
+scrollbar button:active,
+scrollbar button:active:hover,
+scrollbar button:disabled {
+	background: @theme_bg_color;
+	color: black;
+	font-size: .8em;
+	min-height: 15px;
+	min-width: 15px;
+	padding: 1px;
+}
+scrollbar button:disabled {
+	color: shade(@theme_bg_color, .6);
+}
+scrollbar slider {
+	background: @theme_bg_color;
+	/*border-image: url("assets/button/button.png") 2 / 2px stretch;*/
+}
+scrollbar slider:hover {
+	background-color: shade(@theme_bg_color, 1.05);
+}
+scrollbar.vertical slider {
+	background: @theme_bg_color;
+	background-image: -gtk-gradient (linear,
+  	left top,
+  	right top,
+  	from(@theme_button_gradient_to),
+  	to(@theme_button_gradient_from));
+	border-image: url("assets/scrollbar/scrollbar_vertical.png") 2 / 2px stretch;
+	/*border: 1px solid #000;*/
+	min-width: 15px;
+	min-height: 15px;
+	/*padding: 1px;*/
+}
+scrollbar.horizontal slider {
+	background: @theme_bg_color;
+	background-image: -gtk-gradient (linear,
+  	left top,
+  	left bottom,
+  	from(@theme_button_gradient_to),
+  	to(@theme_button_gradient_from));
+	border-image: url("assets/scrollbar/scrollbar_horizontal.png") 2 / 2px stretch;
+	min-width: 15px;
+	min-height: 15px;
+	/*padding: 0;*/
+}
+scrollbar.vertical button.up {
+	-gtk-icon-source: url("assets/scrollbar/arrow_up.png");
+	border-image: url("assets/scrollbar/trough-v.png") 2 / 2px stretch;
+}
+scrollbar.vertical button.down {
+	-gtk-icon-source: url("assets/scrollbar/arrow_down.png");
+	border-image: url("assets/scrollbar/trough-v.png") 2 / 2px stretch;
+}
+scrollbar.horizontal button.up {
+	-gtk-icon-source: -gtk-scaled(url("assets/scrollbar/arrow_left.png"));
+		border-image: url("assets/scrollbar/trough-h.png") 2 / 2px stretch;
+}
+scrollbar.horizontal button.down {
+	-gtk-icon-source: -gtk-scaled(url("assets/scrollbar/arrow_right.png"));
+		border-image: url("assets/scrollbar/trough-h.png") 2 / 2px stretch;
+}
+
+/**************
+ * checkboxes *
+ **************/
+check, radio {
+	margin: .3em .4em .3em .3em;
+	min-height: 1em;
+	min-width: 1em;
+}
+checkbutton:hover, radiobutton:hover {
+	background-color: shade(@theme_bg_color, 1.05);
+}
+checkbutton label, radiobutton label {
+	padding-right: .5em;
+}
+check:disabled, radio:disabled {
+	border-color: shade(@theme_bg_color, .6);
+}
+check {
+	-gtk-icon-source: url("assets/c_box/c_box.png");
+}
+check:checked {
+	-gtk-icon-source: url("assets/c_box/c_box-pressed.png");
+}
+check:checked:disabled {
+	-gtk-icon-source: -gtk-scaled(url("assets/c_box/c_box.png"));
+}
+check:disabled {
+	-gtk-icon-source: -gtk-scaled(url("assets/c_box/c_box.png"));
+}
+check:indeterminated {
+	-gtk-icon-source: -gtk-scaled(url("assets/checkbox-mixed.png"));
+}
+check:indeterminated:disabled {
+	-gtk-icon-source: -gtk-scaled(url("assets/checkbox-mixed-disabled.png"));
+}
+
+/******************
+ * radion buttons *
+ ******************/
+radio,
+.view.cellradio {
+	-gtk-icon-source: -gtk-scaled(url("assets/radio/radio.png"));
+	margin: .3em .4em .3em .3em;
+	min-height: 1em;
+	min-width: 1em;
+}
+radio:checked {
+	-gtk-icon-source: url("assets/radio/radio-pressed.png");
+}
+radio:disabled {
+	-gtk-icon-source: url("assets/radio/radio.png");
+}
+radio:checked:disabled {
+	-gtk-icon-source: url("assets/radio/radio.png");
+}
+
+/****************
+ * text entries *
+ ****************/
+entry {
+	background: @theme_base_color;
+	border-image: url("assets/entry/entry.png") 2 / 2px stretch;
+	padding: .55em;
+
+}
+entry:disabled {
+	background-color: shade(@theme_bg_color, 1.05);
+}
+
+/**************
+ * comboboxes *
+ **************/
+combobox arrow {
+	background-image: -gtk-scaled(url("assets/arrow/combo-arrow-down.png"));
+	background-repeat: no-repeat;
+	background-position: center center;
+	color: @theme_fg_color;
+	/*margin: -.1em;*/
+	min-height: 8px;
+	min-width: 8px;
+	padding:0.4em;
+}
+combobox button:first-child arrow {
+	border-image: url("assets/arrow/combo-arrow-down.png");
+	padding-left: .5em;
+}
+
+combobox entry + button {margin-left:-2px;}
+
+/*********
+ * menus *
+ *********/
+menubar {
+	/*border-image: url("assets/button/button.png") 2 / 2px stretch;*/
+	background: @theme_bg_color;
+}
+menubar decoration,
+.popup decoration {
+	border: 0;
+}
+menu {
+	background: @theme_bg_color;
+	border: solid 3px;
+	border-image: url("assets/frame-shadow-in.png") 3 / 3px stretch;
+	padding: 2px;
+}
+menubar > menuitem {
+	margin: 1px;
+	padding: .3em .4em;
+}
+menubar > menuitem:hover {
+	background: @theme_selected_bg_color;
+	color: @theme_selected_fg_color;
+}
+menuitem {
+	padding: .2em;
+}
+menuitem:hover {
+	background-color: @theme_selected_bg_color;
+	color: @theme_selected_fg_color;
+}
+menu separator {
+	border-image: url("assets/menubar/line-h.png") 1 / 1px stretch;
+	margin: .2em .4em;
+	padding: 1px;
+}
+menuitem > check,
+menuitem > radio,
+menuitem > arrow,
+menuitem > image {
+	min-height: 1em;
+	min-width: 1em;
+}
+menuitem > arrow {
+	font-size: 1.6em;
+	margin: -.2em 0 -.2em 1em;
+	-gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
+}
+
+
+/*************
+ * notebooks *
+ *************/
+notebook.frame > stack {
+	border-image: url("assets/notebook/notebook.png") 3 / 3px stretch;
+	/*padding: 2px;*/
+}
+notebook > header { 
+	/*background-color: @theme_window_color; */
+}
+notebook header.top tabs {
+	margin-top: .2em;
+	border-bottom: 1px solid #4b4b4b
+}
+notebook header.bottom tabs {
+	margin-bottom: .2em;
+}
+notebook header.left tabs {
+	margin-left: .2em;
+}
+notebook header.right tabs {
+	margin-right: .2em;
+}
+notebook tab {
+	background: shade(@theme_bg_color, .9);
+	color: @theme_insensitive_fg_color;
+	/*border-top-right-radius: 50px;*/
+	padding: 0.4em 0.4em;
+}
+notebook header.top tab {
+	border-image: url("assets/notebook/tab-top-new-angled.png") 2 / 2px stretch;
+/*	background-image: -gtk-gradient (linear,
+  	left top,
+  	left bottom,
+  	from(@theme_button_gradient_to),
+  	to(@theme_button_gradient_from));*/
+border-image-slice:13 13 13 13;
+border-image-width: 10px 10px 4px 10px;
+/*border-image-outset: 0px 0px 0px 0px;*/
+border-image-repeat: stretch stretch;
+}
+notebook header.bottom tab {
+	border-image: url("assets/notebook/bottom-tab-new.png") 2 / 2px stretch;
+}
+notebook header.left tab {
+	border-image: url("assets/notebook/left-tab-new.png") 2 / 2px stretch;
+}
+notebook header.right tab {
+	border-image: url("assets/notebook/right-tab-new.png") 2 / 2px stretch;
+}
+notebook header tab:checked {
+	background: @theme_bg_color;
+	color: @theme_fg_color;
+}
+notebook header.top tab:checked {
+	/*background-color: #000;*/
+	margin-bottom: -1px;
+	/*margin-top: -.2em;*/
+}
+notebook header.bottom tab:checked {
+	/*margin-bottom: -.2em;*/
+	margin-top: -2px;
+}
+notebook header.left tab:checked {
+	/*margin-left: -.2em;*/
+	margin-right: -1px;
+}
+notebook header.right tab:checked {
+	margin-left: -2px;
+	/*margin-right: -.2em;*/
+}
+notebook header.top tab:checked * {
+	margin-top: -1px;
+}
+notebook header.bottom tab:checked * {
+	margin-bottom: -.2em;
+}
+notebook header.left tab:checked * {
+	margin-left: -2px;
+}
+notebook header.right tab:checked * {
+	margin-right: -.2em;
+}
+notebook > header > tabs > button.flat {
+/*border: 1px solid #000;*/
+background-color: #00ff00;
+}
+
+/************
+ * expander *
+ ************/
+expander arrow {
+	min-width: 16px;
+	min-height: 16px;
+	-gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
+}
+expander arrow:checked {
+	-gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
+}
+
+/********************************
+ * CSD header and window border *
+ ********************************/
+headerbar {
+	background-color: @theme_bg_color;
+	border-bottom: solid 1px shade(@theme_bg_color, .8);
+	padding: 7px;
+}
+decoration {
+	background-color: @theme_bg_color;
+	border: solid 3px @theme_bg_color;
+	border-image: url("assets/button/button.png") 3 / 3px stretch;
+}
+
+/****************************
+ * application notification *
+ ****************************/
+.app-notification {
+	background-color: @theme_info_bg_color;
+	border-image: url("assets/frame-etched-out.png") 3 / 3px stretch;
+	padding: 7px;
+}
+.app-notification border {
+	border: 0;
+}
+
+/************
+ * popovers *
+ ************/
+popover {
+	border: solid 1px shade(@theme_bg_color, 0.5);
+}
+popover .flat {
+	padding: 5px;
+}
+
+/***********
+ * toolbar *
+ ***********/
+toolbar {
+	background: @theme_bg_color;
+	border-image: url("assets/frame-shadow-out.png") 3 / 3px stretch;
+	padding: 3px;
+}
+toolbar separator {
+	border-image: url("assets/menubar/line-v.png") 1 / 1px stretch;
+	margin: 5px;
+	padding: 1px;
+}
+toolbar button {background:none;}
+
+/*************
+ * statusbar *
+ *************/
+statusbar button {
+	padding: 2px;
+}
+statusbar button:active:hover,
+statusbar button.toggle:checked,
+statusbar button.toggle:active:hover {
+	padding: 3px 1px 1px 3px;
+}
+statusbar frame,
+statusbar > label {
+	background: @theme_bg_color;
+	border-image: url("assets/frame-shadow-in.png") 2 / 2px stretch;
+}
+statusbar frame {
+	padding: 0;
+}
+statusbar frame > border {
+	border: 1px;
+}
+statusbar {
+	/*margin: 0 -9px;*/
+	background: @theme_base_color;
+}
+
+/*************
+ * listboxes *
+ *************/
+list row {
+	padding: 5px;
+}
+list row:hover {
+	background-color: shade(@theme_bg_color, 1.05);
+}
+
+/**************
+ * separators *
+ **************/
+separator.horizontal {
+	border-image: url("assets/menubar/line-h.png") 1 / 1px stretch;
+	padding: 1px;
+}
+separator.vertical {
+	border-image: url("assets/menubar/line-v.png") 1 / 1px stretch;
+	padding: 1px;
+}
+
+/*********
+ * paned *
+ *********/
+paned > separator {
+	background: url("assets/menubar/line-v.png") no-repeat center;
+	-gtk-icon-source: none;
+	padding: 1px;
+}
+paned > separator:hover {
+	background-color: shade(@theme_bg_color, 1.05);
+}
+paned.vertical > separator {
+	background-image: url("assets/menubar/line-h.png");
+}
+
+/**********
+ * frames *
+ **********/
+frame > border {
+	border-image: url("assets/frame-etched-in.png") 2 / 2px stretch;
+	padding: 2px;
+}
+frame { /* LibreOffice combobox's dropdown */
+	border-image: url("assets/frame-etched-in.png") 3 / 3px stretch;
+	padding: 3px;
+}
+box > frame {
+	border: 0;
+	padding: 0;
+}
+
+/**************
+ * button box *
+ **************/
+buttonbox.horizontal button {
+	margin: .2em .4em;
+}
+buttonbox.horizontal button:first-child {
+	margin-left: 0;
+}
+buttonbox.horizontal button:last-child {
+	margin-right: 0;
+}
+progressbar trough,
+levelbar trough,
+scrollbar {
+	background-color: shade(@theme_bg_color, .9);
+	/*border: solid 1px @theme_fg_color;*/
+	/*border-bottom-color: white;
+	border-right-color: white;*/
+	/*border-image: url("assets/scrollbar/trough-h.png") 2 / 2px stretch;*/
+}
+
+progressbar.vertical trough,levelbar.vertical trough,scrollbar.vertical {border-image: url("assets/scrollbar/trough-v.png") 2 / 2px stretch;}
+progressbar.horizontal trough,levelbar.horizontal trough,scrollbar.horizontal {border-image: url("assets/scrollbar/trough-h.png") 2 / 2px stretch;}
+/*********
+ * scale *
+ *********/
+scale {
+	margin: 1px;
+}
+scale slider {
+	background: @theme_bg_color no-repeat center;
+	/*border-image: url("assets/button/button.png") 2 / 2px stretch;*/
+}
+scale slider:hover {
+	background-color: shade(@theme_bg_color, 1.05);
+}
+scale trough:disabled {
+	background-color: @theme_bg_color;
+}
+scale.horizontal trough {
+			background-image: -gtk-scaled(url("assets/scale/trough-horiz.png"));
+			background-repeat: no-repeat;
+			background-size: 100% 23px;
+		min-height: 27px;
+	/*min-width: 100%;*/
+	/*padding: 0 1.2em;*/
+	/*padding:0;*/
+}
+scale.vertical trough {
+	background-image: -gtk-scaled(url("assets/scale/trough-vert.png"));
+			background-repeat: no-repeat;
+			background-size: 23px 100%;
+		/*min-height: 100%;*/
+	min-width: 27px;
+}
+scale.horizontal slider {
+	-gtk-icon-source: -gtk-scaled(url("assets/scale/slider-horiz.png"));
+	min-height: 22px;
+	min-width: 15px;
+}
+scale.vertical slider {
+	background-image: url("assets/scale/slider-vert.png");
+	min-height: 15px;
+	min-width: 22px;
+}
+scale.horizontal mark indicator {
+	background-color: shade(@theme_bg_color, 0.56);
+	min-height: 8px;
+	min-width: 1px;
+}
+scale.vertical mark indicator {
+	background-color: shade(@theme_bg_color, 0.56);
+	min-height: 1px;
+	min-width: 8px;
+}
+
+/***************
+ * color scale *
+ ***************/
+scale.color trough {
+	padding: 0;
+}
+scale.color slider {
+	background-color: transparent;
+	border: 0;
+}
+scale.color.horizontal slider {
+	background-image: url("assets/color-scale-slider-horizontal.png");
+	min-height: 14px;
+	min-width: 16px;
+}
+scale.color.vertical slider {
+	background-image: url("assets/color-scale-slider-vertical.png");
+	min-height: 16px;
+	min-width: 14px;
+}
+
+/***************
+ * progressbar *
+ ***************/
+progressbar {
+	font-size: 1em;
+	margin: 0.2em;
+}
+progressbar trough {
+	padding: 1px;
+}
+progressbar progress {
+	background: @theme_bg_color;
+	background-image: -gtk-gradient (linear,
+  	left top,
+  	left bottom,
+  	from(@theme_button_gradient_to),
+  	to(@theme_button_gradient_from));
+	border-image: url("assets/scrollbar/scrollbar_vertical.png") 2 / 2px stretch;
+	min-width: 15px;
+	min-height: 5px;
+	/*padding: 0;*/
+}
+progressbar.horizontal progress{
+	background: @theme_bg_color;
+	background-image: -gtk-gradient (linear,
+  	left top,
+  	left bottom,
+  	from(@theme_button_gradient_to),
+  	to(@theme_button_gradient_from));
+	border-image: url("assets/scrollbar/scrollbar_horizontal.png") 2 / 2px stretch;
+	min-width: 5px;
+	min-height: 15px;
+	padding: 0;
+}
+
+
+progressbar.vertical progress{border-image: url("assets/progressbar/progressbar-vert.png") 2 / 2px stretch;}
+
+progressbar.horizontal,
+progressbar.horizontal progress,
+progressbar.horizontal trough {
+	min-height: 1.3em;
+}
+progressbar.vertical,
+progressbar.vertical progress,
+progressbar.vertical trough {
+	min-width: 1.3em;
+}
+
+/************
+ * levelbar *
+ ************/
+levelbar block {
+	margin: 1px;
+	padding: 5px;
+}
+levelbar block.filled {
+	/*background: @theme_selected_bg_color;*/
+	background: @theme_bg_color;
+	background-image: -gtk-gradient (linear,
+  	left top,
+  	left bottom,
+  	from(@theme_button_gradient_to),
+  	to(@theme_button_gradient_from));
+	border-image: url("assets/progressbar/progressbar-horiz.png") 2 / 2px stretch;
+}
+
+/**********
+ * switch *
+ **********/
+switch {
+	background-color: shade(@theme_bg_color, .9);
+	border-image: url("assets/button/button-pressed.png") 3 / 3px stretch;
+	min-height: 2em;
+}
+switch slider {
+	background-color: @theme_bg_color;
+	border-image: url("assets/button/button.png") 3 / 3px stretch;
+	margin: 2px;
+	padding: .1em;
+}
+switch:checked {
+	background: @theme_bg_color;
+	color: @theme_selected_fg_color;
+}
+
+/************
+ * treeview *
+ ************/
+.view {
+	background: @theme_base_color;
+}
+.sidebar,
+scrolledwindow,
+scrolledwindow.frame {
+	border-image: url("assets/button/button.png") 2 / 2px stretch;
+	padding: 2px;
+	
+}
+.sidebar {background: @theme_base_color;}
+
+
+/************
+ * tooltips *
+ ************/
+tooltip,
+tooltip.background  {
+	background-color: @theme_tooltip_bg_color;
+	border: solid 1px alpha(@theme_tooltip_fg_color, .3);
+	color: alpha(@theme_tooltip_fg_color, .8);
+}
+tooltip *, .tooltip * {
+	background-color: transparent;
+}
+tooltip decoration {
+	border: 0;
+}
+
+/*************
+ * calendars *
+ *************/
+calendar {
+	padding: 2px;
+}
+calendar.header {
+	background: @theme_bg_color;
+}
+calendar.view {
+	border-image: url("assets/frame-etched-out.png") 2 / 2px stretch;
+}
+calendar:indeterminate {
+	color: alpha(@theme_fg_color, 0.4);
+}
+calendar.highlight {
+	background-color: @theme_selected_bg_color;
+	color: @theme_selected_fg_color;
+}
+
+/************
+ * infobars *
+ ************/
+.info {
+	background-color: @theme_info_bg_color;
+}
+.warning {
+	background-color: @theme_warning_bg_color;
+}
+.error {
+	background-color: @theme_error_bg_color;
+}
+.info, .warning, .error {
+	border-image: url("assets/button/button.png") 3 / 3px stretch;
+}
+
+/***********************
+ * file chooser dialog *
+ ***********************/
+dialog filechooser placessidebar.sidebar.frame .sidebar-row {
+	padding: .3em 1em;
+}
+dialog filechooser .frame.sidebar .sidebar-row label {
+	padding-left: .8em;
+}
+dialog filechooser placessidebar button {
+	background: transparent;
+	border: 0;
+	padding: 0;
+}
+dialog filechooser placessidebar *:hover button {
+	background-color: transparent;
+}
+dialog filechooser stack {
+	background: @theme_bg_color;
+}
+dialog filechooser .path-bar .slider-button,
+dialog filechooser .path-bar .slider-button:active {
+	padding: 5px 0;
+}
+dialog filechooser .path-bar image {
+	margin-right: 5px;
+}
+dialog filechooser .frame.sidebar separator {
+	border-image: url("assets/menubar/line-h.png") 1 / 1px stretch;
+	margin: 3px 5px;
+	padding: 1px;
+}
+dialog filechooser actionbar {
+	border: solid 1px shade(@theme_bg_color, .6);
+	margin-top: 5px;
+	padding: 7px;
+}
+dialog filechooser frame {
+	padding: 0;
+}
+dialog filechooser frame border {
+	border: 0;
+}
+
+/*****************
+ * color chooser *
+ *****************/
+dialog colorchooser colorswatch {
+	border-image: url("assets/frame-etched-out.png") 2 / 2px stretch;
+	padding: 2px;
+}
+dialog colorchooser colorswatch.dark * {
+	color: white;
+}
+dialog colorchooser colorswatch.light * {
+	color: black;
+}
+dialog colorchooser #add-color-button {
+	border-image: url("assets/button/button.png") 3 / 3px stretch;
+}
+dialog colorchooser colorswatch:selected * {
+	background: transparent;
+}
+colorchooser .popover {
+	background: @theme_bg_color;
+	border-image: url("assets/button/button.png") 3 / 3px stretch;
+}
+
+/****************
+ * print dialog *
+ ****************/
+printdialog > box > box {
+	padding: 5px;
+}
+printdialog box {
+	background: @theme_bg_color;
+}
+printdialog notebook stack {
+	border-image: url("assets/notebook/notebook.png") 3 / 3px stretch;
+	padding: 2px;
+}
+printdialog paper {
+	background-color: @theme_base_color;
+	border: solid 1px shade(@theme_bg_color, .6);
+}
+
+/*********************
+ * Spinner Animation *
+ *********************/
+@keyframes spin {
+	to { -gtk-icon-transform: rotate(1turn); }
+}
+spinner {
+	background-color: transparent;
+	opacity: 0;
+}
+spinner:checked {
+	opacity: 1;
+	animation: spin 1s linear infinite;
+}
+
+/* fix nautilus */
+overlay > scrolledwindow {
+	background-color: @theme_base_color;
+}
+
+scrolledwindow {
+	border-image: url("assets/button/button.png") 2 / 2px stretch;
+}
+
+
+
+
+/* added rules from bleshell rakksor */
+/**********************************************/
+/* items with white background (views) */
+/**********************************************/
+
+.view, iconview, textview, treeview {
+	background-color: @theme_base_color;
+}
+
+.view:disabled, iconview:disabled, textview:disabled, treeview:disabled {
+	background-color: @theme_bg_color;
+}
+
+.view rubberband, .view .rubberband {
+	background-color: alpha (@theme_selected_bg_color, 0.75);
+	border: 1px solid @theme_selected_bg_color;
+}
+
+/* fix geany */
+stack > scrolledwindow {
+	border: none;
+}
+
+/* fix nautilus */
+overlay > scrolledwindow {
+	background-color: @theme_base_color;
+}
+
+junction {
+	background-color: @theme_bg_color;
+}
+/**********************************************/
+/* placessidebar (filechooser and nautilus) */
+/**********************************************/
+
+placessidebar {
+	border: 1px solid @borders;
+}
+
+/**********************************************/
+/* nautilus status bar */
+/**********************************************/
+
+.floating-bar {
+/*	background-image: linear-gradient(
+	                  to bottom,
+	                  @theme_base_color 20%,
+	                  shade(@theme_base_color, 0.9));*/
+	background-color: @theme_bg_color;
+	border-color: @theme_fg_color;
+	border-radius: 2px;
+	border-width: 1px;
+	border-style: solid;
+}
+
+.floating-bar.top {
+	border-top-width: 0;
+	border-top-right-radius: 0;
+	border-top-left-radius: 0;
+}
+
+.floating-bar.right {
+	border-right-width: 0;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.floating-bar.bottom {
+	border-bottom-width: 0;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.floating-bar.left {
+	border-left-width: 0;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.floating-bar .button {
+/*	background-color: alpha (@theme_base_color, 0.0);
+	background-image: none;
+	border-style: none;
+	border-image: none;*/
+	-GtkButton-image-spacing: 0;
+	-GtkButton-inner-border: 0;
+}

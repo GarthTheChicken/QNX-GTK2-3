@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=QNX
+Version=v0.1
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=QNX
+ButtonLayout=:minimize,maximize,close
